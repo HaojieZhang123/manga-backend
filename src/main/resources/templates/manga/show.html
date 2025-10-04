@@ -28,6 +28,25 @@
     <div th:unless="${manga}">
         <p>No manga found.</p>
     </div>
+
+    <hr>
+
+    <a th:href="@{/manga}">
+        <button>Manga</button>
+    </a>
+
+    <a th:href="@{/authors}">
+        <button>Authors</button>
+    </a>
+
+    <a th:href="@{/genres}">
+        <button>Genres</button>
+    </a>
+
+    <a th:href="@{/status}">
+        <button>Status</button>
+    </a>
+
 </body>
 
 </html>

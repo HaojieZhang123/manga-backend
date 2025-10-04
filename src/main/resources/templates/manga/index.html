@@ -7,10 +7,10 @@
 </head>
 
 <body>
-    <h1>Index</h1>
+    <h1>List of all manga</h1>
 
     <div th:if="${mangas.isEmpty()}">
-        <p>No mangas found.</p>
+        <p>No manga found.</p>
     </div>
 
     <div th:unless="${mangas.isEmpty()}">
@@ -59,8 +59,23 @@
     <hr>
 
     <a th:href="@{/manga/create}">
-        <button>Create new manga</button>
+        <button>Add new manga</button>
     </a>
+
+    <hr>
+
+    <a th:href="@{/authors}">
+        <button>Authors</button>
+    </a>
+
+    <a th:href="@{/genres}">
+        <button>Genres</button>
+    </a>
+
+    <a th:href="@{/status}">
+        <button>Status</button>
+    </a>
+
 </body>
 
 </html>

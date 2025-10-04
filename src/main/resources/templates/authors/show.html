@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <title>Author details</title>
+</head>
+
+<body>
+    <h1> Author details</h1>
+
+    <div th:if="${author}" th:object="${author}">
+        <p><b>Name:</b> <span th:text="*{name}"></span></p>
+    </div>
+
+    <div th:unless="${author}">
+        <p>No author found.</p>
+    </div>
+
+    <hr>
+
+    <a th:href="@{/manga}">
+        <button>Manga</button>
+    </a>
+
+    <a th:href="@{/authors}">
+        <button>Authors</button>
+    </a>
+
+    <a th:href="@{/genres}">
+        <button>Genres</button>
+    </a>
+
+    <a th:href="@{/status}">
+        <button>Status</button>
+    </a>
+
+</body>
+
+</html>
