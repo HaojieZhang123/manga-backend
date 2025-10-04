@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <title>Manga</title>
+</head>
+
+<body>
+    <h1 th:if="${edit}">Edit manga</h1>
+    <h1 th:unless="${edit}">Create new manga</h1>
+
+    <form th:action="${edit} ? @{/manga/edit/{id}(id=${manga.id})} : @{/manga/create}" th:object="${manga}"
+        method="post">
+
+        <div>
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" th:field="*{title}" placeholder="Manga title (e.g. One Piece)"
+                required th:errorclass="is-invalid" />
+
+            <div th:if="${#fields.hasErrors('title')}">
+                <ul>
+                    <li th:each="error : ${#fields.errors('title')}" th:text="${error}"></li>
+                </ul>
+            </div>
+        </div>
+
+        <div>
+            <label for="description">Description:</label>
+            <input type="text" id="description" name="description" th:field="*{description}"
+                placeholder="Manga description" required th:errorclass="is-invalid" />
+
+            <div th:if="${#fields.hasErrors('description')}">
+                <ul>
+                    <li th:each="error : ${#fields.errors('description')}" th:text="${error}"></li>
+                </ul>
+            </div>
+        </div>
+
+        <div>
+            <label for="releaseDate">Release Date:</label>
+            <input type="date" id="releaseDate" name="releaseDate" th:field="*{releaseDate}" required
+                th:errorclass="is-invalid" />
+
+            <div th:if="${#fields.hasErrors('releaseDate')}">
+                <ul>
+                    <li th:each="error : ${#fields.errors('releaseDate')}" th:text="${error}"></li>
+                </ul>
+            </div>
+        </div>
+
+        <div>
+            <p>Authors:</p>
+            <div th:each="author : ${authors}">
+                <input type="checkbox" th:field="*{authors}" th:value="${author.id}" th:text="${author.name}" />
+            </div>
+        </div>
+
+        <div>
+            <p>Genres:</p>
+            <div th:each="genre : ${genres}">
+                <input type="radio" th:field="*{genres}" th:value="${genre.id}" th:text="${genre.name}" />
+            </div>
+        </div>
+
+        <div>
+            <p>Status:</p>
+            <div th:each="releaseStatus : ${status}">
+                <input type="checkbox" th:field="*{status}" th:value="${releaseStatus.id}"
+                    th:text="${releaseStatus.name}" />
+            </div>
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
+
+
+</body>
+
+</html>

@@ -16,6 +16,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
 
 @Entity
@@ -33,7 +34,7 @@ public class Manga {
     @Lob
     private String description;
 
-    @NotBlank(message = "Release date is required")
+    @NotNull(message = "Release date is required")
     @PastOrPresent(message = "Release date must be in the past or present")
     LocalDate releaseDate;
 

@@ -38,7 +38,7 @@
                         </a>
                     </td>
                     <td>
-                        <a th:href="@{/manga/{id}/edit(id=${manga.id})}">
+                        <a th:href="@{/manga/edit/{id}(id=${manga.id})}">
                             <button>Modify</button>
                         </a>
                     </td>
@@ -51,6 +51,12 @@
             </tbody>
         </table>
     </div>
+
+    <hr>
+
+    <a th:href="@{/manga/create}">
+        <button>Create new manga</button>
+    </a>
 </body>
 
 </html>
