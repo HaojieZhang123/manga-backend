@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <title>Genres</title>
+</head>
+
+<body>
+    <h1>List of all genres</h1>
+
+    <div th:if="${genres.isEmpty()}">
+        <p>No genres found.</p>
+    </div>
+
+    <div th:unless="${genres.isEmpty()}">
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Details</th>
+                    <th>Modify</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="genre : ${genres}">
+                    <td th:text="${genre.name}"></td>
+                    <td>
+                        <a th:href="@{/genres/{id}(id=${genre.id})}">
+                            <button>Details</button>
+                        </a>
+                    </td>
+                    <td>
+                        <a th:href="@{/genres/edit/{id}(id=${genre.id})}">
+                            <button>Modify</button>
+                        </a>
+                    </td>
+                    <td>
+                        <form th:action="@{/genres/delete/{id}(id=${genre.id})}" method="post">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+
+    <a th:href="@{/genres/create}">
+        <button>Add new genre</button>
+    </a>
+
+    <hr>
+
+    <a th:href="@{/manga}">
+        <button>Manga</button>
+    </a>
+
+    <a th:href="@{/authors}">
+        <button>Authors</button>
+    </a>
+
+    <a th:href="@{/status}">
+        <button>Status</button>
+    </a>
+
+</body>
+
+</html>
