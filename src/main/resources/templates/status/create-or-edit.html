@@ -3,29 +3,38 @@
 
 <head>
     <title>Status</title>
+    <link th:replace="fragments/header :: css">
 </head>
 
 <body>
-    <h1 th:if="${edit}">Edit status</h1>
-    <h1 th:unless="${edit}">Create new status</h1>
 
-    <form th:action="${edit} ? @{/status/edit/{id}(id=${status.id})} : @{/status/create}" method="post"
-        th:object="${status}">
+    <nav th:replace="fragments/header :: header"></nav>
 
-        <div>
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" th:field="*{name}" placeholder="Status name" required
-                th:errorclass="is-invalid" />
+    <div class="container">
+        <h1 th:if="${edit}">Edit status</h1>
+        <h1 th:unless="${edit}">Create new status</h1>
 
-            <div th:if="${#fields.hasErrors('name')}">
-                <ul>
-                    <li th:each="error : ${#fields.errors('name')}" th:text="${error}"></li>
-                </ul>
+        <form th:action="${edit} ? @{/status/edit/{id}(id=${status.id})} : @{/status/create}" method="post"
+            th:object="${status}">
+
+            <div class="mb-3">
+                <label for="name" class="form-label">Name:</label>
+                <input type="text" id="name" name="name" th:field="*{name}" placeholder="Status name" required
+                    th:errorclass="is-invalid" class="form-control" />
+
+                <div th:if="${#fields.hasErrors('name')}">
+                    <ul>
+                        <li th:each="error : ${#fields.errors('name')}" th:text="${error}"></li>
+                    </ul>
+                </div>
             </div>
-        </div>
 
-        <button type="submit">Save</button>
-    </form>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+
+    <script th:replace="fragments/header :: js"></script>
+
 </body>
 
 </html>

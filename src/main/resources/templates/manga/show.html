@@ -4,48 +4,38 @@
 <head>
     <meta charset="UTF-8">
     <title>Manga</title>
+    <link th:replace="fragments/header :: css">
 </head>
 
 <body>
-    <h1>Details</h1>
 
-    <div th:if="${manga}" th:object="${manga}">
-        <p><b>Title:</b> <span th:text="*{title}"></span></p>
-        <p><b>Description:</b> <span th:text="*{description}"></span></p>
-        <p><b>Release Date:</b> <span th:text="*{releaseDate}"></span></p>
+    <nav th:replace="fragments/header :: header"></nav>
 
-        <p><b>Authors:</b></p>
-        <ul>
-            <li th:each="author : *{authors}" th:text="${author.name}"></li>
-        </ul>
-        <p><b>Genres:</b></p>
-        <ul>
-            <li th:each="genre : *{genres}" th:text="${genre.name}"></li>
-        </ul>
-        <p><b>Status:</b> <span th:text="*{status.name}"></span></p>
+    <div class="container">
+        <h1>Details</h1>
+
+        <div th:if="${manga}" th:object="${manga}">
+            <p><b>Title:</b> <span th:text="*{title}"></span></p>
+            <p><b>Description:</b> <span th:text="*{description}"></span></p>
+            <p><b>Release Date:</b> <span th:text="*{releaseDate}"></span></p>
+
+            <p><b>Authors:</b></p>
+            <ul>
+                <li th:each="author : *{authors}" th:text="${author.name}"></li>
+            </ul>
+            <p><b>Genres:</b></p>
+            <ul>
+                <li th:each="genre : *{genres}" th:text="${genre.name}"></li>
+            </ul>
+            <p><b>Status:</b> <span th:text="*{status.name}"></span></p>
+        </div>
+
+        <div th:unless="${manga}">
+            <p>No manga found.</p>
+        </div>
     </div>
 
-    <div th:unless="${manga}">
-        <p>No manga found.</p>
-    </div>
-
-    <hr>
-
-    <a th:href="@{/manga}">
-        <button>Manga</button>
-    </a>
-
-    <a th:href="@{/authors}">
-        <button>Authors</button>
-    </a>
-
-    <a th:href="@{/genres}">
-        <button>Genres</button>
-    </a>
-
-    <a th:href="@{/status}">
-        <button>Status</button>
-    </a>
+    <script th:replace="fragments/header :: js"></script>
 
 </body>
 

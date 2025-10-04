@@ -3,67 +3,61 @@
 
 <head>
     <title>statuses</title>
+    <link th:replace="fragments/header :: css">
 </head>
 
 <body>
-    <h1>List of all status</h1>
 
-    <div th:if="${statuses.isEmpty()}">
-        <p>No status found.</p>
+    <nav th:replace="fragments/header :: header"></nav>
+
+    <div class="container">
+        <h1>List of all status</h1>
+
+        <div th:if="${statuses.isEmpty()}">
+            <p>No status found.</p>
+        </div>
+
+        <div th:unless="${statuses.isEmpty()}">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Details</th>
+                        <th scope="col">Modify</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="status : ${statuses}">
+                        <td th:text="${status.name}"></td>
+                        <td>
+                            <a th:href="@{/status/{id}(id=${status.id})}">
+                                <button type="button" class="btn btn-primary">Details</button>
+                            </a>
+                        </td>
+                        <td>
+                            <a th:href="@{/status/edit/{id}(id=${status.id})}">
+                                <button type="button" class="btn btn-warning">Modify</button>
+                            </a>
+                        </td>
+                        <td>
+                            <form th:action="@{/status/delete/{id}(id=${status.id})}" method="post">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr>
+
+        <a th:href="@{/status/create}">
+            <button type="button" class="btn btn-primary">Add new status</button>
+        </a>
     </div>
 
-    <div th:unless="${statuses.isEmpty()}">
-        <table>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Details</th>
-                    <th>Modify</th>
-                    <th>Delete</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="status : ${statuses}">
-                    <td th:text="${status.name}"></td>
-                    <td>
-                        <a th:href="@{/status/{id}(id=${status.id})}">
-                            <button>Details</button>
-                        </a>
-                    </td>
-                    <td>
-                        <a th:href="@{/status/edit/{id}(id=${status.id})}">
-                            <button>Modify</button>
-                        </a>
-                    </td>
-                    <td>
-                        <form th:action="@{/status/delete/{id}(id=${status.id})}" method="post">
-                            <button type="submit">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <hr>
-
-    <a th:href="@{/status/create}">
-        <button>Add new status</button>
-    </a>
-
-    <hr>
-
-    <a th:href="@{/manga}">
-        <button>Manga</button>
-    </a>
-
-    <a th:href="@{/authors}">
-        <button>Authors</button>
-    </a>
-
-    <a th:href="@{/genres}">
-        <button>Genres</button>
-    </a>
+    <script th:replace="fragments/header :: js"></script>
 
 </body>
 
