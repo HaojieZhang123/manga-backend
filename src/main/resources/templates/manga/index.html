@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Manga</title>
+</head>
+
+<body>
+    <h1>Index</h1>
+
+    <div th:if="${mangas.isEmpty()}">
+        <p>No mangas found.</p>
+    </div>
+
+    <div th:unless="${mangas.isEmpty()}">
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Genre</th>
+                    <th>Status</th>
+                    <th>Details</th>
+                    <th>Modify</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="manga : ${mangas}">
+                    <td th:text="${manga.title}"></td>
+                    <td th:text="${manga.authors}"></td>
+                    <td th:text="${manga.genres}"></td>
+                    <td th:text="${manga.status}"></td>
+                    <td>
+                        <a th:href="@{/manga/{id}(id=${manga.id})}">
+                            <button>Details</button>
+                        </a>
+                    </td>
+                    <td>
+                        <a th:href="@{/manga/{id}/edit(id=${manga.id})}">
+                            <button>Modify</button>
+                        </a>
+                    </td>
+                    <td>
+                        <form th:action="@{/manga/delete/{id}(id=${manga.id})}" method="post">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

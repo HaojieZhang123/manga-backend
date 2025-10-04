@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Manga</title>
+</head>
+
+<body>
+    <h1>Details</h1>
+
+    <div th:if="${manga}" th:object="${manga}">
+        <p>Title: <span th:text="*{title}"></span></p>
+        <p>Description: <span th:text="*{description}"></span></p>
+        <p>Release Date: <span th:text="*{releaseDate}"></span></p>
+
+        <p>Authors: <span th:text="*{authors}"></span></p>
+        <p>Genres: <span th:text="*{genres}"></span></p>
+        <p>Status: <span th:text="*{status}"></span></p>
+    </div>
+
+    <div th:unless="${manga}">
+        <p>No manga found.</p>
+    </div>
+</body>
+
+</html>
