@@ -3,12 +3,12 @@
 
 <head>
     <title>Author</title>
-    <link th:replace="fragments/header :: css">
+    <link th:replace="~{fragments/header :: css}">
 </head>
 
 <body>
 
-    <nav th:replace="fragments/header :: header"></nav>
+    <nav th:replace="~{fragments/header :: header}"></nav>
 
     <div class="container">
         <h1 th:if="${edit}">Edit author</h1>
@@ -33,7 +33,7 @@
         </form>
     </div>
 
-    <script th:replace="fragments/header :: js"></script>
+    <script th:replace="~{fragments/header :: js}"></script>
 </body>
 
 </html>
