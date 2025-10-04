@@ -29,9 +29,13 @@
             <tbody>
                 <tr th:each="manga : ${mangas}">
                     <td th:text="${manga.title}"></td>
-                    <td th:text="${manga.authors}"></td>
-                    <td th:text="${manga.genres}"></td>
-                    <td th:text="${manga.status}"></td>
+                    <td>
+                        <div th:each="author : ${manga.authors}" th:text="${author.name}"></div>
+                    </td>
+                    <td>
+                        <div th:each="genre : ${manga.genres}" th:text="${genre.name}"></div>
+                    </td>
+                    <td th:text="${manga.status.name}"></td>
                     <td>
                         <a th:href="@{/manga/{id}(id=${manga.id})}">
                             <button>Details</button>

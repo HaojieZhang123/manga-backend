@@ -58,15 +58,14 @@
         <div>
             <p>Genres:</p>
             <div th:each="genre : ${genres}">
-                <input type="radio" th:field="*{genres}" th:value="${genre.id}" th:text="${genre.name}" />
+                <input type="checkbox" th:field="*{genres}" th:value="${genre.id}" th:text="${genre.name}" />
             </div>
         </div>
 
         <div>
             <p>Status:</p>
-            <div th:each="releaseStatus : ${status}">
-                <input type="checkbox" th:field="*{status}" th:value="${releaseStatus.id}"
-                    th:text="${releaseStatus.name}" />
+            <div th:each="status : ${statuses}">
+                <input type="radio" th:field="*{status}" th:value="${status.id}" th:text="${status.name}" />
             </div>
         </div>
 

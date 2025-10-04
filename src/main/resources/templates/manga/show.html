@@ -10,13 +10,19 @@
     <h1>Details</h1>
 
     <div th:if="${manga}" th:object="${manga}">
-        <p>Title: <span th:text="*{title}"></span></p>
-        <p>Description: <span th:text="*{description}"></span></p>
-        <p>Release Date: <span th:text="*{releaseDate}"></span></p>
+        <p><b>Title:</b> <span th:text="*{title}"></span></p>
+        <p><b>Description:</b> <span th:text="*{description}"></span></p>
+        <p><b>Release Date:</b> <span th:text="*{releaseDate}"></span></p>
 
-        <p>Authors: <span th:text="*{authors}"></span></p>
-        <p>Genres: <span th:text="*{genres}"></span></p>
-        <p>Status: <span th:text="*{status}"></span></p>
+        <p><b>Authors:</b></p>
+        <ul>
+            <li th:each="author : *{authors}" th:text="${author.name}"></li>
+        </ul>
+        <p><b>Genres:</b></p>
+        <ul>
+            <li th:each="genre : *{genres}" th:text="${genre.name}"></li>
+        </ul>
+        <p><b>Status:</b> <span th:text="*{status.name}"></span></p>
     </div>
 
     <div th:unless="${manga}">
