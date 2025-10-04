@@ -32,8 +32,8 @@
 
             <div class="mb-3">
                 <label for="description" class="form-label">Description:</label>
-                <input type="text" id="description" name="description" th:field="*{description}"
-                    placeholder="Manga description" required th:errorclass="is-invalid" class="form-control" />
+                <textarea id="description" name="description" th:field="*{description}" placeholder="Manga description"
+                    required th:errorclass="is-invalid" class="form-control" rows="5"></textarea>
 
                 <div th:if="${#fields.hasErrors('description')}">
                     <ul>
