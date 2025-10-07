@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -101,7 +102,7 @@ public class MangaRestController {
     }
 
     // update
-    @PostMapping("/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Manga> update(@PathVariable("id") Integer id, @Valid @ModelAttribute("manga") MangaDTO manga,
             BindingResult bindingResult) {
         if (mangaService.findById(id).isEmpty()) {
