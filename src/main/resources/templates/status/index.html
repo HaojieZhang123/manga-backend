@@ -23,8 +23,8 @@
                     <tr>
                         <th scope="col">Name</th>
                         <th scope="col">Details</th>
-                        <th scope="col">Modify</th>
-                        <th scope="col">Delete</th>
+                        <th sec:authorize="hasAuthority('ADMIN')" scope="col">Modify</th>
+                        <th sec:authorize="hasAuthority('ADMIN')" scope="col">Delete</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,12 +35,12 @@
                                 <button type="button" class="btn btn-primary">Details</button>
                             </a>
                         </td>
-                        <td>
+                        <td sec:authorize="hasAuthority('ADMIN')">
                             <a th:href="@{/status/edit/{id}(id=${status.id})}">
                                 <button type="button" class="btn btn-warning">Modify</button>
                             </a>
                         </td>
-                        <td>
+                        <td sec:authorize="hasAuthority('ADMIN')">
                             <form th:action="@{/status/delete/{id}(id=${status.id})}" method="post">
                                 <button type="submit" class="btn btn-danger">Delete</button>
                             </form>
@@ -50,9 +50,9 @@
             </table>
         </div>
 
-        <hr>
+        <hr sec:authorize="hasAuthority('ADMIN')">
 
-        <a th:href="@{/status/create}">
+        <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/status/create}">
             <button type="button" class="btn btn-primary">Add new status</button>
         </a>
     </div>

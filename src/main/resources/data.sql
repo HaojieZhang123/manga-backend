@@ -67,3 +67,11 @@ INSERT INTO `genre_manga` (manga_id, genre_id) VALUES (4, 1);
 INSERT INTO `genre_manga` (manga_id, genre_id) VALUES (4, 2);
 INSERT INTO `genre_manga` (manga_id, genre_id) VALUES (4, 8);
 
+INSERT INTO `users` (`username`, `password`) VALUES ('admin', '{noop}12345678');
+INSERT INTO `users` (`username`, `password`) VALUES ('user', '{noop}12345678');
+
+INSERT INTO `roles` (`name`) VALUES ('ADMIN');
+INSERT INTO `roles` (`name`) VALUES ('USER');
+
+INSERT INTO `role_user` (`user_id`, `role_id`) VALUES (1, 1);
+INSERT INTO `role_user` (`user_id`, `role_id`) VALUES (2, 2);

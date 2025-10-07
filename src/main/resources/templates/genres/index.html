@@ -23,8 +23,8 @@
                     <tr>
                         <th scope="col">Name</th>
                         <th scope="col">Details</th>
-                        <th scope="col">Modify</th>
-                        <th scope="col">Delete</th>
+                        <th sec:authorize="hasAuthority('ADMIN')" scope="col">Modify</th>
+                        <th sec:authorize="hasAuthority('ADMIN')" scope="col">Delete</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,12 +35,12 @@
                                 <button type="button" class="btn btn-primary">Details</button>
                             </a>
                         </td>
-                        <td>
+                        <td sec:authorize="hasAuthority('ADMIN')">
                             <a th:href="@{/genres/edit/{id}(id=${genre.id})}">
                                 <button type="button" class="btn btn-warning">Modify</button>
                             </a>
                         </td>
-                        <td>
+                        <td sec:authorize="hasAuthority('ADMIN')">
                             <form th:action="@{/genres/delete/{id}(id=${genre.id})}" method="post">
                                 <button type="submit" class="btn btn-danger">Delete</button>
                             </form>
@@ -50,9 +50,9 @@
             </table>
         </div>
 
-        <hr>
+        <hr sec:authorize="hasAuthority('ADMIN')">
 
-        <a th:href="@{/genres/create}">
+        <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/genres/create}">
             <button type="button" class="btn btn-primary">Add new genre</button>
         </a>
     </div>
