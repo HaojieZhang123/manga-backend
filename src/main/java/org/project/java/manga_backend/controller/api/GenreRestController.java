@@ -19,9 +19,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 
+@RestController
+@RequestMapping("/api/genres")
 public class GenreRestController {
 
     @Autowired
@@ -59,16 +63,19 @@ public class GenreRestController {
         } else {
             Genre newGenre = new Genre();
             newGenre.setName(genre.getName());
-            genreService.store(newGenre);
 
-            HashSet<Manga> linkedManga = new HashSet<>();
-            for (Integer mangaId : genre.getMangaIds()) {
-                Optional<Manga> manga = mangaService.findById(mangaId);
-                if (manga.isPresent()) {
-                    linkedManga.add(manga.get());
+            if (genre.getMangaIds().length > 0) {
+                HashSet<Manga> linkedManga = new HashSet<>();
+                for (Integer mangaId : genre.getMangaIds()) {
+                    Optional<Manga> manga = mangaService.findById(mangaId);
+                    if (manga.isPresent()) {
+                        linkedManga.add(manga.get());
+                    }
                 }
+                newGenre.setMangas(linkedManga);
             }
-            newGenre.setMangas(linkedManga);
+
+            genreService.store(newGenre);
 
             return new ResponseEntity<Genre>(newGenre, HttpStatusCode.valueOf(201)); // created
         }
@@ -88,14 +95,18 @@ public class GenreRestController {
         Genre genreToUpdate = genreService.findById(id).get();
         genreToUpdate.setName(genre.getName());
 
-        HashSet<Manga> linkedManga = new HashSet<>();
-        for (Integer mangaId : genre.getMangaIds()) {
-            Optional<Manga> manga = mangaService.findById(mangaId);
-            if (manga.isPresent()) {
-                linkedManga.add(manga.get());
+        if (genre.getMangaIds().length > 0) {
+            HashSet<Manga> linkedManga = new HashSet<>();
+            for (Integer mangaId : genre.getMangaIds()) {
+                Optional<Manga> manga = mangaService.findById(mangaId);
+                if (manga.isPresent()) {
+                    linkedManga.add(manga.get());
+                }
             }
+            genreToUpdate.setMangas(linkedManga);
         }
-        genreToUpdate.setMangas(linkedManga);
+
+        genreService.update(genreToUpdate);
 
         return new ResponseEntity<Genre>(genreToUpdate, HttpStatusCode.valueOf(200)); // OK
     }

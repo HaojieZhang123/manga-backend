@@ -63,16 +63,19 @@ public class AuthorRestController {
         } else {
             Author newAuthor = new Author();
             newAuthor.setName(author.getName());
-            authorService.store(newAuthor);
 
-            HashSet<Manga> linkedManga = new HashSet<>();
-            for (Integer mangaId : author.getMangaIds()) {
-                Optional<Manga> manga = mangaService.findById(mangaId);
-                if (manga.isPresent()) {
-                    linkedManga.add(manga.get());
+            if (author.getMangaIds().length > 0) {
+                HashSet<Manga> linkedManga = new HashSet<>();
+                for (Integer mangaId : author.getMangaIds()) {
+                    Optional<Manga> manga = mangaService.findById(mangaId);
+                    if (manga.isPresent()) {
+                        linkedManga.add(manga.get());
+                    }
                 }
+                newAuthor.setMangas(linkedManga);
             }
-            newAuthor.setMangas(linkedManga);
+
+            authorService.store(newAuthor);
 
             return new ResponseEntity<Author>(newAuthor, HttpStatusCode.valueOf(201)); // created
         }
@@ -92,14 +95,18 @@ public class AuthorRestController {
         Author authorToUpdate = authorService.findById(id).get();
         authorToUpdate.setName(author.getName());
 
-        HashSet<Manga> linkedManga = new HashSet<>();
-        for (Integer mangaId : author.getMangaIds()) {
-            Optional<Manga> manga = mangaService.findById(mangaId);
-            if (manga.isPresent()) {
-                linkedManga.add(manga.get());
+        if (author.getMangaIds().length > 0) {
+            HashSet<Manga> linkedManga = new HashSet<>();
+            for (Integer mangaId : author.getMangaIds()) {
+                Optional<Manga> manga = mangaService.findById(mangaId);
+                if (manga.isPresent()) {
+                    linkedManga.add(manga.get());
+                }
             }
+            authorToUpdate.setMangas(linkedManga);
         }
-        authorToUpdate.setMangas(linkedManga);
+
+        authorService.update(authorToUpdate);
 
         return new ResponseEntity<Author>(authorToUpdate, HttpStatusCode.valueOf(200)); // OK
     }
