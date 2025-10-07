@@ -15,10 +15,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -56,7 +56,7 @@ public class AuthorRestController {
 
     // create
     @PostMapping
-    public ResponseEntity<Author> create(@Valid @ModelAttribute("author") AuthorDTO author,
+    public ResponseEntity<Author> create(@Valid @RequestBody AuthorDTO author,
             BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return new ResponseEntity<Author>(HttpStatusCode.valueOf(400)); // bad request
@@ -84,7 +84,7 @@ public class AuthorRestController {
     // update
     @PutMapping("/{id}")
     public ResponseEntity<Author> update(@PathVariable("id") Integer id,
-            @Valid @ModelAttribute("author") AuthorDTO author,
+            @Valid @RequestBody AuthorDTO author,
             BindingResult bindingResult) {
         if (authorService.findById(id).isEmpty()) {
             return new ResponseEntity<Author>(HttpStatusCode.valueOf(404)); // not found

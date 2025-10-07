@@ -19,10 +19,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -66,7 +66,7 @@ public class MangaRestController {
 
     // create
     @PostMapping
-    public ResponseEntity<Manga> create(@Valid @ModelAttribute("manga") MangaDTO manga, BindingResult bindingResult) {
+    public ResponseEntity<Manga> create(@Valid @RequestBody MangaDTO manga, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return new ResponseEntity<Manga>(HttpStatusCode.valueOf(400)); // bad request
         }
@@ -103,7 +103,7 @@ public class MangaRestController {
 
     // update
     @PutMapping("/{id}")
-    public ResponseEntity<Manga> update(@PathVariable("id") Integer id, @Valid @ModelAttribute("manga") MangaDTO manga,
+    public ResponseEntity<Manga> update(@PathVariable("id") Integer id, @Valid @RequestBody MangaDTO manga,
             BindingResult bindingResult) {
         if (mangaService.findById(id).isEmpty()) {
             return new ResponseEntity<Manga>(HttpStatusCode.valueOf(404)); // not found
