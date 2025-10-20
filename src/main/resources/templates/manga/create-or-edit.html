@@ -54,6 +54,18 @@
                 </div>
             </div>
 
+            <div class="mb-3">
+                <label for="coverImage" class="form-label">Cover Image URL:</label>
+                <input type="text" id="coverImage" name="coverImage" th:field="*{coverImage}"
+                    placeholder="URL of the cover image" th:errorclass="is-invalid" class="form-control" />
+
+                <div th:if="${#fields.hasErrors('coverImage')}">
+                    <ul>
+                        <li th:each="error : ${#fields.errors('coverImage')}" th:text="${error}"></li>
+                    </ul>
+                </div>
+            </div>
+
             <div class="row mb-3">
                 <div class="col">
                     <p>Authors:</p>

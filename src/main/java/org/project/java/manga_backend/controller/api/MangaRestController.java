@@ -76,6 +76,7 @@ public class MangaRestController {
         newManga.setTitle(manga.getTitle());
         newManga.setDescription(manga.getDescription());
         newManga.setReleaseDate(manga.getReleaseDate());
+        newManga.setCoverImage(manga.getCoverImage());
 
         HashSet<Author> newAuthors = new HashSet<>();
         for (Integer authorId : manga.getAuthorIds()) {
@@ -117,6 +118,7 @@ public class MangaRestController {
         mangaToUpdate.setTitle(manga.getTitle());
         mangaToUpdate.setDescription(manga.getDescription());
         mangaToUpdate.setReleaseDate(manga.getReleaseDate());
+        mangaToUpdate.setCoverImage(manga.getCoverImage());
 
         HashSet<Author> newAuthors = new HashSet<>();
         for (Integer authorId : manga.getAuthorIds()) {

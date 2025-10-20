@@ -2,6 +2,7 @@ package org.project.java.manga_backend.model.dto;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.Lob;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
@@ -12,11 +13,15 @@ public class MangaDTO {
     private String title;
 
     @NotBlank(message = "Description is required")
+    @Lob
     private String description;
 
     @NotNull(message = "Release date is required")
     @PastOrPresent(message = "Release date must be in the past or present")
     private LocalDate releaseDate;
+
+    @Lob
+    private String coverImage;
 
     private Integer[] authorIds;
     private Integer[] genreIds;
@@ -54,6 +59,14 @@ public class MangaDTO {
 
     public void setReleaseDate(LocalDate releaseDate) {
         this.releaseDate = releaseDate;
+    }
+
+    public String getCoverImage() {
+        return coverImage;
+    }
+
+    public void setCoverImage(String coverImage) {
+        this.coverImage = coverImage;
     }
 
     public Integer[] getAuthorIds() {

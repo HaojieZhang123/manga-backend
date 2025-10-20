@@ -38,6 +38,10 @@ public class Manga {
     @PastOrPresent(message = "Release date must be in the past or present")
     LocalDate releaseDate;
 
+    // cover image link
+    @Lob
+    private String coverImage;
+
     // many to many relation: authors
     @ManyToMany
     @JoinTable(name = "author_manga", joinColumns = @JoinColumn(name = "manga_id"), inverseJoinColumns = @JoinColumn(name = "author_id"))
@@ -86,6 +90,14 @@ public class Manga {
 
     public void setReleaseDate(LocalDate releaseDate) {
         this.releaseDate = releaseDate;
+    }
+
+    public String getCoverImage() {
+        return coverImage;
+    }
+
+    public void setCoverImage(String coverImage) {
+        this.coverImage = coverImage;
     }
 
     public Set<Author> getAuthors() {
